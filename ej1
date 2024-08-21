@@ -1,0 +1,43 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class PlayerMovement : MonoBehaviour
+{
+    [SerializeField] private float moveSpeed = 5f;  
+    private Rigidbody2D rb2d;
+
+    private void Start()
+    {
+        rb2d = GetComponent<Rigidbody2D>();
+    }
+
+    private void Update()
+    {
+        
+        HandleMovement();
+    }
+
+    private void HandleMovement()
+    {
+        
+        float x = Input.GetAxis("Horizontal");
+        float y = Input.GetAxis("Vertical");
+
+        
+        Vector2 movement = new Vector2(x, y) * moveSpeed;
+
+        
+        rb2d.velocity = movement;
+    }
+
+
+    // Refactorización:
+    // 1. Encapsulamiento: moveSpeed es ahora private con [SerializeField] para ajustarla en el Inspector.
+    // 2. Abstracción: Movimiento encapsulado en HandleMovement para un Update más limpio.
+    // 3. Corrección de errores: Corregido "Verical" a "Vertical". Eliminada variable Fuerza por falta de uso.
+    // 4. Movimiento con física: Se usa Rigidbody2D.velocity en lugar de mover el Transform directamente, mejorando la integración con las físicas.
+    // El script es ahora más limpio, seguro y fácil de mantener.
+
+}
+
