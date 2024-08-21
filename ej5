@@ -1,0 +1,60 @@
+using UnityEngine;
+
+public class Ejercicio5 : MonoBehaviour
+{
+    private void Start()
+    {
+        
+    }
+
+    private void Update()
+    {
+        
+    }
+
+    public void EmpezarMision(ActivarMision mission)
+    {
+        if (mission != null)
+        {
+            mission.StartMission();
+        }
+    }
+}
+
+
+
+
+
+using UnityEngine;
+
+public class ActivarMision
+{
+    public void StartMission()
+    {
+        Debug.Log("Misión comenzada");
+    }
+
+    public void CompleteMission()
+    {
+        Debug.Log("Misión completada");
+    }
+}
+
+
+
+
+// Separación de Clases:
+//    La clase `ActivarMision` se ha movido a un archivo separado, mejorando así el encapsulamiento y la responsabilidad única de cada clase.
+//    Esto facilita la organización del proyecto y permite que las clases se reutilicen en otros contextos si es necesario.
+
+// Eliminación de Métodos Innecesarios:
+//    Se eliminaron los métodos `Start()` y `Update()` de la clase `ActivarMision`, ya que no contenían lógica útil.
+//    Esto simplifica el código y elimina cualquier sobrecarga innecesaria.
+
+// Simplificación de la Herencia:
+//    `ActivarMision` ya no hereda de `MonoBehaviour` porque no utiliza ninguna de las funcionalidades específicas de Unity.
+//    Esto hace que la clase sea más ligera, fácil de testear, y no dependa del ciclo de vida de Unity.
+
+// Modularidad y Extensibilidad:
+//    Al separar las clases, el código es más modular. Ahora es más fácil de mantener, extender y reutilizar.
+
