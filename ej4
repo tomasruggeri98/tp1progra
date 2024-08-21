@@ -1,0 +1,70 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class PlayerController : MonoBehaviour
+{
+    [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] private float jumpForce = 300f;
+    [SerializeField] private float rotationSpeed = 10f;
+
+    private Rigidbody2D rb2d;
+    private bool isJumping = false;
+
+    private void Start()
+    {
+        rb2d = GetComponent<Rigidbody2D>();
+    }
+
+    private void Update()
+    {
+        HandleMovement();
+        HandleRotation();
+        HandleJump();
+    }
+
+    private void HandleMovement()
+    {
+        
+        float movimiento_x = Input.GetAxis("Horizontal");
+        rb2d.velocity = new Vector2(movimiento_x * moveSpeed, rb2d.velocity.y);
+    }
+
+    private void HandleRotation()
+    {
+        
+        if (Input.GetKey(KeyCode.R))
+        {
+            transform.Rotate(0, 0, rotationSpeed * Time.deltaTime);
+        }
+    }
+
+    private void HandleJump()
+    {
+        
+        if (Input.GetButtonDown("Jump") && !isJumping)
+        {
+            rb2d.AddForce(Vector2.up * jumpForce);
+            isJumping = true;
+            Debug.Log("Estoy saltando Wiiii");
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            isJumping = false;
+        }
+    }
+
+    // Refactorización:
+    // 1. Encapsulación: Variables privadas con [SerializeField] para ajustar desde el Inspector.
+    // 2. Eliminación de redundancias: Movimientos y variables simplificados.
+    // 3. Corrección del movimiento: Movimiento continuo con Input.GetAxis.
+    // 4. Manejador de salto: Uso de OnCollisionEnter2D para detectar cuando el jugador toca el suelo.
+    // Script mejorado, más limpio y fácil de mantener.
+
+
+}
